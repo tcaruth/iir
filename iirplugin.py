@@ -87,7 +87,7 @@ for i in layerstenminuscodes:
 		f.close()
 	#else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
 for i in layerstenpluscodes:
-	jgw = open(str(self.browseEdit.currentText() + i + ".jgw", "w")
+	jgw = open(str(self.browseEdit.currentText()) + i + ".jgw", "w")
 	jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
 	jgw.close()
 	if i == "S2014C": #workaround until we see if 2015 has the same server
