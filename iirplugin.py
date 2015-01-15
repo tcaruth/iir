@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# 0.15.1.14.23.58
+# 0.15.1.15.00.38
 
 import requests
 import os
 import re
-error.open("c:/iirerrorlog.txt",w)
+
+error = open("C:/iirerrorlog.txt", 'wb')
 
 def calcvar(url):
 	error.write('calculating variables\n')
@@ -35,20 +36,20 @@ def serverError( status, reason, i, url ): # where we're going, we dont need err
 def getjgwjpg():
 	error.write('started getjgwjpg()\n')
 	for i in layerstenminuscodes:
-		jgw = open(str(self.browseEdit.currentText()) + i + '.jgw', 'w')
+		jgw = open(str(self.dlg.browseEdit.text()) + i + '.jgw', 'w')
 		jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
 		jgw.close()
 		curval = layerstenminuscodes.get(i)
 		layersdata['layers'] = curval
 		jpg = requests.get(layerstenminusurl, params=layersdata)
 		if int(jpg.status_code) == 200:
-			f = open(str(self.browseEdit.currentText()) + i + '.jpg', 'wb', 0)
+			f = open(str(self.dlg.browseEdit.text()) + i + '.jpg', 'wb', 0)
 			f.write(jpg.content)
 			f.close()
 		# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
 	error.write('layerstenminuscodes\n')
 	for i in layerstenpluscodes:
-		jgw = open(str(self.browseEdit.currentText()) + i + '.jgw', 'w')
+		jgw = open(str(self.dlg.browseEdit.text()) + i + '.jgw', 'w')
 		jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
 		jgw.close()
 		if i == 'S2014C':  # workaround until we see if 2015 has the same server
@@ -56,7 +57,7 @@ def getjgwjpg():
 							+ str(layerstenpluscodes.get(i)), params=layersdata)
 			print 'Using workaround for ' + str(jpg.url)
 			if int(jpg.status_code) == 200:
-				f = open(str(self.browseEdit.currentText()) + i + '.jpg', 'wb', 0)
+				f = open(str(self.dlg.browseEdit.text()) + i + '.jpg', 'wb', 0)
 				f.write(jpg.content)
 				f.close()
 			# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
@@ -65,7 +66,7 @@ def getjgwjpg():
 			layersdata['layers'] = curval
 			jpg = requests.get(layerstenplusurl[0] + str(layerstenpluscodes.get(i)) + layerstenplusurl[1], params=layersdata)
 			if int(jpg.status_code) == 200:
-				f = open(str(self.browseEdit.currentText()) + i + '.jpg', 'wb', 0)
+				f = open(str(self.dlg.browseEdit.text()) + i + '.jpg', 'wb', 0)
 				f.write(jpg.content)
 				f.close()
 			# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
@@ -73,10 +74,10 @@ def getjgwjpg():
 		
 		
 error.write('pulling urlEdit text')
-rawurl = self.dlg.urlEdit.currentText()
+rawurl = self.dlg.urlEdit.text()
 url = re.sub('[" \']{,}', '', rawurl)
 url = url.split('&')
-rawfilename = self.dlg.clientEdit.currentText()
+rawfilename = self.dlg.clientEdit.text()
 filename = re.sub("(\.\w{3}){,}", '', rawfilename)
 error.write('urlEdit: ' + rawurl + '\n')
 error.write('rawfilename: ' + rawfilename + '\n')
