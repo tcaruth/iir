@@ -138,7 +138,9 @@ class iir:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            error = open("c:/iirerrorlog.txt", 'wb')
+			# v15.1.15.02.00
+            # error = open("C:/iirerrorlog.txt", 'wb')
+			error = open('~/Desktop/iirerrorlog.txt','wb')
             def calcvar(url):
                 error.write('143 calculating variables\n')
                 x = filter(lambda x: 'x0' in x, url)
@@ -167,20 +169,20 @@ class iir:
             def getjgwjpg(): # urlparam = [ url, x, y, width, height, zoom, bbox ]
                 error.write('168 started getjgwjpg()\n')
                 for i in layerstenminuscodes:
-                    jgw = open(str(self.dlg.browseEdit.text()) + i + '.jgw', 'w')
+                    jgw = open(filename + i + '.jgw', 'w')
                     jgw.write(str(urlparam[6]) + "\n0.0\n0.0\n-" + str(urlparam[6]) + "\n" + str(urlparam[1]) + "\n" + str(urlparam[2]))
                     jgw.close()
                     curval = layerstenminuscodes.get(i)
                     layersdata['layers'] = curval
                     jpg = requests.get(layerstenminusurl, params=layersdata)
                     if int(jpg.status_code) == 200:
-                        f = open(str(self.dlg.browseEdit.text()) + i + '.jpg', 'wb', 0)
+                        f = open(filename + i + '.jpg', 'wb', 0)
                         f.write(jpg.content)
                         f.close()
                     # else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
                 error.write('181 layerstenminuscodes complete\n')
                 for i in layerstenpluscodes:
-                    jgw = open(str(self.dlg.browseEdit.text()) + i + '.jgw', 'w')
+                    jgw = open(filename + i + '.jgw', 'w')
                     jgw.write(str(urlparam[6]) + "\n0.0\n0.0\n-" + str(urlparam[6]) + "\n" + str(urlparam[2]) + "\n" + str(urlparam[3]))
                     jgw.close()
                     if i == 'S2014C':  # workaround until we see if 2015 has the same server
@@ -188,7 +190,7 @@ class iir:
                                         + str(layerstenpluscodes.get(i)), params=layersdata)
                         print 'Using workaround for ' + str(jpg.url)
                         if int(jpg.status_code) == 200:
-                            f = open(str(self.dlg.browseEdit.text()) + i + '.jpg', 'wb', 0)
+                            f = open(filename + i + '.jpg', 'wb', 0)
                             f.write(jpg.content)
                             f.close()
                         # else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
@@ -197,7 +199,7 @@ class iir:
                         layersdata['layers'] = curval
                         jpg = requests.get(layerstenplusurl[0] + str(layerstenpluscodes.get(i)) + layerstenplusurl[1], params=layersdata)
                         if int(jpg.status_code) == 200:
-                            f = open(str(self.dlg.browseEdit.text()) + i + '.jpg', 'wb', 0)
+                            f = open(filename + i + '.jpg', 'wb', 0)
                             f.write(jpg.content)
                             f.close()
                         # else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
@@ -209,8 +211,9 @@ class iir:
             url = url.split('&')
             rawfilename = self.dlg.clientEdit.text()
             filename = re.sub("(\.\w{3}){,}", '', rawfilename)
+            filename = str( self.dlg.browseEdit.text() + "/" + filename + "_" )
             error.write('212 urlEdit: ' + rawurl + '\n')
-            error.write('213 rawfilename: ' + rawfilename + '\n')
+            error.write('213 filename: ' + filename + '\n')
 
             # urlparam = [[urlsplit], x, y, width, height, zoom, bbox]
             urlparam = calcvar(url)
