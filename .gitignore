@@ -1,3 +1,14 @@
-*.jpg
-*.jgw
+help/make.bat
+help/Makefile
+help/source/conf.py
+help/source/index.rst
+i18n/af.ts
+Makefile
+metadata.txt
+pb_tool.cfg
+plugin_upload.py
 *.pyc
+requests/*
+scripts/*
+test/*
+*.autosave
