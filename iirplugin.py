@@ -5,8 +5,10 @@
 import requests
 import os
 import re
+error.open("c:/iirerrorlog.txt",w)
 
 def calcvar(url):
+	error.write('calculating variables\n')
     x = filter(lambda x: 'x0' in x, url)
     x = int(x[0].lstrip('x0='))
     y = filter(lambda y: 'y0' in y, url)
@@ -24,12 +26,14 @@ def calcvar(url):
     bbox4 = str(y + height)
     bbox = bbox1 + ',' + bbox2 + ',' + bbox3 + ',' + bbox4
     urlparams = [ url, x, y, width, height, zoom, bbox ]
+	error.write('done')
     return urlparams
 def serverError( status, reason, i, url ): # where we're going, we dont need errors. if needed, add in a messagebox with the following stuff, or similar
     print 'Server returned error ' + str(jpg.status_code) + ' with reason "' + str(jpg.reason) + '" for file "' + i + '".'
     print 'URL: ' + jpg.url
     print ''
 def getjgwjpg():
+	error.write('started getjgwjpg()\n')
 	for i in layerstenminuscodes:
 		jgw = open(str(self.browseEdit.currentText()) + i + '.jgw', 'w')
 		jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
@@ -42,6 +46,7 @@ def getjgwjpg():
 			f.write(jpg.content)
 			f.close()
 		# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
+	error.write('layerstenminuscodes\n')
 	for i in layerstenpluscodes:
 		jgw = open(str(self.browseEdit.currentText()) + i + '.jgw', 'w')
 		jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
@@ -64,13 +69,17 @@ def getjgwjpg():
 				f.write(jpg.content)
 				f.close()
 			# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
-				
+	error.write('layerstenminuscodes\n')
 		
+		
+error.write('pulling urlEdit text')
 rawurl = self.dlg.urlEdit.currentText()
 url = re.sub('[" \']{,}', '', rawurl)
 url = url.split('&')
 rawfilename = self.dlg.clientEdit.currentText()
 filename = re.sub("(\.\w{3}){,}", '', rawfilename)
+error.write('urlEdit: ' + rawurl + '\n')
+error.write('rawfilename: ' + rawfilename + '\n')
 
 # urlparams = [[urlsplit], x, y, width, height, zoom, bbox]
 urlparams = calcvar(url)
@@ -112,4 +121,6 @@ layerstenminusurl = 'http://ortho.gis.iastate.edu/server.cgi?'
 layerstenplusurl = [ 'http://ags.gis.iastate.edu/arcgisserver/services/Ortho/', '/ImageServer/WMSServer?' ]
 
 # do work
+error.write('attempting to call getjgwjpg()\n')
 getjgwjpg()
+error.close()
