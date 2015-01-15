@@ -140,7 +140,7 @@ class iir:
         if result:
             # v15.1.15.02.13
             home = os.path.expanduser("~")
-            error = open(home + '\\' + 'iirerror.log','wb')
+            error = open(home + '/' + 'iirerror.log','wb')
             def calcvar(url):
                 error.write('143 calculating variables\n')
                 x = filter(lambda x: 'x0' in x, url)
