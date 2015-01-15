@@ -138,9 +138,9 @@ class iir:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-			# v15.1.15.02.00
-            # error = open("C:/iirerrorlog.txt", 'wb')
-			error = open('~/Desktop/iirerrorlog.txt','wb')
+            # v15.1.15.02.13
+            home = os.path.expanduser("~")
+            error = open(home + '\\' + 'iirerror.log','wb')
             def calcvar(url):
                 error.write('143 calculating variables\n')
                 x = filter(lambda x: 'x0' in x, url)
