@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# 0.15.1.14.23.58
 
 import requests
 import os
@@ -30,18 +31,17 @@ def serverError( status, reason, i, url ): # where we're going, we dont need err
     print ''
 def getjgwjpg():
 	for i in layerstenminuscodes:
-    jgw = open(str(self.browseEdit.currentText()) + i + '.jgw', 'w')
-	jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
-    jgw.close()
-    curval = layerstenminuscodes.get(i)
-    layersdata['layers'] = curval
-    jpg = requests.get(layerstenminusurl, params=layersdata)
-    if int(jpg.status_code) == 200:
-        f = open(str(self.browseEdit.currentText()) + i + '.jpg', 'wb',
-                 0)
-        f.write(jpg.content)
-        f.close()
-    # else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
+		jgw = open(str(self.browseEdit.currentText()) + i + '.jgw', 'w')
+		jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
+		jgw.close()
+		curval = layerstenminuscodes.get(i)
+		layersdata['layers'] = curval
+		jpg = requests.get(layerstenminusurl, params=layersdata)
+		if int(jpg.status_code) == 200:
+			f = open(str(self.browseEdit.currentText()) + i + '.jpg', 'wb', 0)
+			f.write(jpg.content)
+			f.close()
+		# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
 	for i in layerstenpluscodes:
 		jgw = open(str(self.browseEdit.currentText()) + i + '.jgw', 'w')
 		jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
@@ -55,7 +55,6 @@ def getjgwjpg():
 				f.write(jpg.content)
 				f.close()
 			# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
-
 		else: 
 			curval = layerstenminuscodes.get(i)
 			layersdata['layers'] = curval
@@ -65,10 +64,8 @@ def getjgwjpg():
 				f.write(jpg.content)
 				f.close()
 			# else: serverError(jpg.status_code,jpg.reason,i,jpg.url)
+				
 		
-
-
-
 rawurl = self.dlg.urlEdit.currentText()
 url = re.sub('[" \']{,}', '', rawurl)
 url = url.split('&')
