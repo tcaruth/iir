@@ -138,7 +138,7 @@ class iir:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            # v15.1.15.02.13
+            # v15.17.2.1713
             home = os.path.expanduser("~")
             error = open(home + '/' + 'iirerror.log','wb')
             def calcvar(url):
@@ -170,7 +170,7 @@ class iir:
                 error.write('168 started getjgwjpg()\n')
                 for i in layerstenminuscodes:
                     jgw = open(filename + i + '.jgw', 'w')
-                    jgw.write(str(urlparam[6]) + "\n0.0\n0.0\n-" + str(urlparam[6]) + "\n" + str(urlparam[1]) + "\n" + str(urlparam[2]))
+                    jgw.write(str(urlparam[5]) + "\n0.0\n0.0\n-" + str(urlparam[5]) + "\n" + str(urlparam[1]) + "\n" + str(urlparam[2]))
                     jgw.close()
                     curval = layerstenminuscodes.get(i)
                     layersdata['layers'] = curval
@@ -183,7 +183,7 @@ class iir:
                 error.write('181 layerstenminuscodes complete\n')
                 for i in layerstenpluscodes:
                     jgw = open(filename + i + '.jgw', 'w')
-                    jgw.write(str(urlparam[6]) + "\n0.0\n0.0\n-" + str(urlparam[6]) + "\n" + str(urlparam[2]) + "\n" + str(urlparam[3]))
+                    jgw.write(str(urlparam[5]) + "\n0.0\n0.0\n-" + str(urlparam[5]) + "\n" + str(urlparam[2]) + "\n" + str(urlparam[3]))
                     jgw.close()
                     if i == 'S2014C':  # workaround until we see if 2015 has the same server
                         jpg = requests.get('http://gis.apfo.usda.gov/arcgis/services/NAIP/Iowa_2014_1m_NC/ImageServer/WMSServer?layers='

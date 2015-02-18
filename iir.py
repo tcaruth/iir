@@ -170,6 +170,13 @@ for i in layerstenpluscodes:
 	progx = progress(progx)
 	jgw = open(i + ".jgw", "w")
 	jgw.write(str(zoom) + "\n0.0\n0.0\n-" + str(zoom) + "\n" + str(x) + "\n" + str(y))
+    # holds the following
+    # 2 (zoom)
+    # 0.0 (x skew)
+    # 0.0 (y skew)
+    # -2 (neg zoom)
+    # 479677 (x)
+    # 4707654 (y)
 	jgw.close()
 	if i == "S2014C": #workaround until we see if 2015 has the same server
 		jpg = requests.get("http://gis.apfo.usda.gov/arcgis/services/NAIP/Iowa_2014_1m_NC/ImageServer/WMSServer?layers=" + str(layerstenpluscodes.get(i)), params=layersdata)
