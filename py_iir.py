@@ -144,9 +144,9 @@ class iir:
             def calcvar(url):
                 error.write('143 calculating variables\n')
                 x = filter(lambda x: 'x0' in x, url)
-                x = int(x[0].lstrip('x0='))
+                x = float(x[0].lstrip('x0='))
                 y = filter(lambda y: 'y0' in y, url)
-                y = int(y[0].lstrip('y0='))
+                y = float(y[0].lstrip('y0='))
                 width = filter(lambda width: 'pwidth' in width, url)
                 width = int(width[0].lstrip('pwidth='))
                 height = filter(lambda height: 'pheight' in height, url)
@@ -159,8 +159,23 @@ class iir:
                 bbox3 = str(x + width)
                 bbox4 = str(y + height)
                 bbox = bbox1 + ',' + bbox2 + ',' + bbox3 + ',' + bbox4
+                x = int(x - width)
+                y = int(y - height)
                 urlparam = [ url, x, y, width, height, zoom, bbox ]
+                #                 0   1  2   3        4         5        6
                 error.write('161 done\n')
+                error.write(str(urlparam[1]))
+                error.write('\n')
+                error.write(str(urlparam[2]))
+                error.write('\n')
+                error.write(str(urlparam[3]))
+                error.write('\n')
+                error.write(str(urlparam[4]))
+                error.write('\n')
+                error.write(str(urlparam[5]))
+                error.write('\n')
+                error.write(str(urlparam[6]))
+                error.write('\n')
                 return urlparam
             def serverError( status, reason, i, url ): # where we're going, we dont need errors. if needed, add in a messagebox with the following stuff, or similar
                 print 'Server returned error ' + str(jpg.status_code) + ' with reason "' + str(jpg.reason) + '" for file "' + i + '".'

@@ -1,5 +1,7 @@
 # IIR
-
+'''
+http://ortho.gis.iastate.edu/client_pls.cgi?zoom=2&x0=649121&y0=4534830&layer=naip_2013_nc&action=pan&pwidth=800&pheight=500
+'''
 # this whole thing is really messy, but i can't see any repeating patterns where it would make sense ( or shorter ) to use functions
 import requests
 import os
@@ -54,6 +56,10 @@ bbox2 = str(y - height)
 bbox3 = str(x + width)
 bbox4 = str(y + height)
 bbox = bbox1 + "," + bbox2 + "," + bbox3 + "," + bbox4
+
+#was neccessary in plugin version, havent checked standalone
+# x = int(x - width)
+# y = int(y - height)
 
 #layers
 newavailablelayers = {
