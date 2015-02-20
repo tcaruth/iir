@@ -198,7 +198,7 @@ class iir:
                 error.write('181 layerstenminuscodes complete\n')
                 for i in layerstenpluscodes:
                     jgw = open(filename + i + '.jgw', 'w')
-                    jgw.write(str(urlparam[5]) + "\n0.0\n0.0\n-" + str(urlparam[5]) + "\n" + str(urlparam[2]) + "\n" + str(urlparam[3]))
+                    jgw.write(str(urlparam[5]) + "\n0.0\n0.0\n-" + str(urlparam[5]) + "\n" + str(urlparam[1]) + "\n" + str(urlparam[2]))
                     jgw.close()
                     if i == 'S2014C':  # workaround until we see if 2015 has the same server
                         jpg = requests.get('http://gis.apfo.usda.gov/arcgis/services/NAIP/Iowa_2014_1m_NC/ImageServer/WMSServer?layers='
