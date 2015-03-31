@@ -160,7 +160,12 @@ class iir:
                 bbox4 = str(y + height)
                 bbox = bbox1 + ',' + bbox2 + ',' + bbox3 + ',' + bbox4
                 x = int(x - width)
-                y = int(y - height)
+                y = int(y + height)
+                # rvices/Ortho/naip_2013_cir/ImageServer/WMSServer?wmtver=1.0&request=map&bbox=624500,4615820,625250,4616370&width=750&height=550
+                # i figurativly cant even. what the fuck houdini bullshit is fucking going on
+                # this is because i cant math, and fuck logic
+                # x = str(bbox1) # why the fuck do these have to be non-integers? they only choose to work as strings
+                # y = str(bbox4)
                 urlparam = [ url, x, y, width, height, zoom, bbox ]
                 #                 0   1  2   3        4         5        6
                 error.write('161 done\n')
